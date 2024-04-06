@@ -6,6 +6,9 @@ export type Channels = 'ipc-example';
 
 const electronHandler = {
   ipcRenderer: {
+    test() {
+      ipcRenderer.send('test');
+    },
     sendMessage(channel: Channels, ...args: unknown[]) {
       ipcRenderer.send(channel, ...args);
     },
