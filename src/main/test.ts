@@ -1,6 +1,7 @@
-const puppeteer = require('puppeteer-extra');
-const StealthPlugin = require('puppeteer-extra-plugin-stealth');
-const { executablePath, Page, Puppeteer, Browser } = require('puppeteer');
+import puppeteer from 'puppeteer-extra';
+import StealthPlugin from 'puppeteer-extra-plugin-stealth';
+import { executablePath, Page, Puppeteer, Browser } from 'puppeteer';
+import path from 'path';
 
 const account = {
   username: 'bright.figueroa11ca@hotmail.com',
@@ -8,9 +9,10 @@ const account = {
 };
 
 puppeteer.use(StealthPlugin());
-const pathToExtension = require('path').join(__dirname, '2captcha-solver');
 
 export const test = async () => {
+  // 可以调用的时候去改 mainfest 配置
+  const pathToExtension = path.join(__dirname, '2captcha-solver');
   const browser = await puppeteer.launch({
     headless: false,
     args: [

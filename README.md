@@ -4,7 +4,7 @@ See our [docs and guides here](https://electron-react-boilerplate.js.org/docs/in
 
 ## package.json build config
 
-```json
+```
 // 构建信息
 build:{
   "productName":"", // 打包后的名字
@@ -20,8 +20,8 @@ build:{
 }
 
 // release / app / package.json
-{
-  "name":'' , // 构建的名字
+{ 
+  "name":'' , // 构建的名字   
   "version":"", // 版本
 }
 ```
