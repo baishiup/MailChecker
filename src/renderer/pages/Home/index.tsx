@@ -5,6 +5,7 @@ import { useDrop } from 'ahooks';
 import styles from './styles.less';
 import { useKeywords } from './useKeywords';
 import { ParseInputFileResType, parseInputFile } from './parseInputFile';
+import { Log } from './Log';
 /**
  * 功能点
  *
@@ -68,6 +69,10 @@ export function Home() {
   };
 
   const start = () => {
+    if (!alldata.length) {
+      return message.info('没有导入数据');
+    }
+
     window.electron.ipcRenderer.runSchedule(alldata);
 
     console.log('start');
@@ -78,43 +83,42 @@ export function Home() {
     window.electron.ipcRenderer.stopSchedule();
   };
 
+  const clear = () => {};
+
   return (
     <div className={styles.page} ref={dropRef}>
       <Row gutter={16} style={{ height: '100%' }}>
-        <Col span={6}>
-          <Card bordered={false} className={styles.left}>
-            <Flex align="center" justify="space-between">
-              <span>all</span>
-              <span>{alldata.length}</span>
-            </Flex>
-            <Flex align="center" justify="space-between">
-              <span>可连接</span>
-              <span>{gooddata.length}</span>
-            </Flex>
-            <Flex align="center" justify="space-between">
-              <span>可匹配</span>
-              <span>{founddata.length}</span>
-            </Flex>
-
-            <Flex
-              align="center"
-              justify="space-between"
-              style={{ marginTop: 40 }}
-            >
-              <Button type="primary" onClick={start}>
-                开始
-              </Button>
-              <Button onClick={stop}>停止</Button>
-            </Flex>
-          </Card>
-        </Col>
         <Col flex={1}>
-          <Card bordered={false} className={styles.right}>
-            Card content
-          </Card>
+          <Flex vertical style={{ height: '100%' }}>
+            <Card>
+              <Flex
+                style={{ height: 40 }}
+                align="center"
+                justify="space-between"
+              >
+                <h2 style={{ margin: 0 }}>已导入数据: {alldata.length}</h2>
+                <Flex>
+                  <Button type="primary" onClick={start}>
+                    开始
+                  </Button>
+                  <Button style={{ marginLeft: 10 }} danger onClick={stop}>
+                    停止
+                  </Button>
+                  <Button style={{ marginLeft: 10 }} onClick={clear}>
+                    清空
+                  </Button>
+                </Flex>
+              </Flex>
+            </Card>
+            <Card style={{ flex: 1, margin: '16px 0' }}>
+              <Log />
+            </Card>
+            <Card style={{ height: 400 }}>1</Card>
+          </Flex>
         </Col>
+
         <Col span={6}>
-          <Card bordered={false} className={styles.right}>
+          <Card bordered={false} style={{ height: '100%' }}>
             <List
               size="small"
               header={
