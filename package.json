@@ -75,9 +75,6 @@
     "imap": "^0.8.19",
     "less": "^4.2.0",
     "less-loader": "^12.2.0",
-    "puppeteer": "^22.6.3",
-    "puppeteer-extra": "^3.3.6",
-    "puppeteer-extra-plugin-stealth": "^2.11.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.16.0"
@@ -172,6 +169,7 @@
           "x64"
         ]
       },
+      "artifactName": "${name}-${version}.${arch}.${ext}",
       "type": "distribution",
       "hardenedRuntime": true,
       "entitlements": "assets/entitlements.mac.plist",
@@ -179,7 +177,7 @@
       "gatekeeperAssess": false
     },
     "dmg": {
-      "artifactName": "mc-${version}.${ext}",
+      "artifactName": "mc-${version}.${arch}.${ext}",
       "contents": [
         {
           "x": 130,
@@ -194,7 +192,7 @@
       ]
     },
     "win": {
-      "artifactName": "mc-${version}.${ext}",
+      "artifactName": "mc-${version}.${arch}.${ext}",
       "target": [
         "nsis"
       ]

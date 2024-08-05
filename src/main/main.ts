@@ -9,7 +9,7 @@
  * `./src/main.js` using webpack. This gives us some performance wins.
  */
 import path from 'path';
-import { app, BrowserWindow, shell } from 'electron';
+import { app, BrowserWindow, shell, session } from 'electron';
 import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
 import MenuBuilder from './menu';
@@ -56,12 +56,26 @@ const createWindow = async () => {
       preload: app.isPackaged
         ? path.join(__dirname, 'preload.js')
         : path.join(__dirname, '../../.erb/dll/preload.js'),
+      webviewTag: true,
     },
   });
 
   ipcHandler(mainWindow);
 
   mainWindow.loadURL(resolveHtmlPath('index.html'));
+
+  // 加载Chrome扩展
+  // 开了 窗口不显示
+  // const extensionPath = path.join(__dirname, 'tran');
+  // session.defaultSession
+  //   .loadExtension(extensionPath)
+  //   .then(() => {
+  //     console.log('Extension loaded successfully');
+  //   })
+  //   .catch((err) => {
+  //     console.error('Failed to load extension:', err);
+  //   });
+  // console.log(2);
 
   mainWindow.on('ready-to-show', () => {
     if (!mainWindow) {

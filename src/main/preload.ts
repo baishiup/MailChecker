@@ -17,6 +17,10 @@ const electronHandler = {
     stopSchedule() {
       ipcRenderer.send('stopSchedule');
     },
+
+    openSubUrl(url: string) {
+      ipcRenderer.send('openSubUrl', url);
+    },
   },
 };
 

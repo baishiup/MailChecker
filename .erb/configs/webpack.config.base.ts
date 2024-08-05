@@ -8,7 +8,13 @@ import webpackPaths from './webpack.paths';
 import { dependencies as externals } from '../../release/app/package.json';
 
 const configuration: webpack.Configuration = {
-  externals: [...Object.keys(externals || {})],
+  externals: [
+    ...Object.keys(externals || {}),
+    // 不加构建不了 加了构建后跑不起来
+    // 'puppeteer-extra',
+    // 'puppeteer-extra-plugin-stealth',
+    // 'puppeteer-extra-plugin-recaptcha',
+  ],
 
   stats: 'errors-only',
 
